@@ -1,0 +1,117 @@
+package com.example.visitingcard;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+
+public class signup extends AppCompatActivity {
+    EditText username,passwd;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_signup);
+        username=findViewById(R.id.uid);
+        passwd=findViewById(R.id.pwd);
+    }
+
+    public void signup(View v)
+    {
+        if(passwd.getText().toString().length()>=8 && validatepassword(passwd.getText().toString()))
+        {
+            Toast.makeText(this, "Signup Successful", Toast.LENGTH_LONG).show();
+            Intent i = new Intent(this,signin.class);
+            Bundle b = new Bundle();
+            b.putString("uid",username.getText().toString());
+            b.putString("password",passwd.getText().toString());
+            i.putExtras(b);
+            startActivity(i);
+        }
+        else
+        {
+
+            Toast.makeText(this, "Password not meeting constraints", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public boolean validatepassword(String password)
+    {
+        Pattern ptrn;
+        Matcher mat;
+        String passwordptrn="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[<>/+-@#$])(?=\\S+$).{8,}$";
+        ptrn=Pattern.compile(passwordptrn);
+        mat=ptrn.matcher(password);
+        return mat.matches();
+    }
+}
+
+
+
+XML
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".signup">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:background="#00BCD4"
+        android:text="SIGNUP ACTIVITY"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/black"
+        ></View>
+
+    <EditText
+        android:id="@+id/uid"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:hint="Enter User ID"
+        android:textAlignment="center"
+        android:textColor="#00BCD4"
+        android:textSize="30sp" />
+
+    <EditText
+        android:id="@+id/pwd"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:hint="Enter Password"
+        android:inputType="textPassword"
+        android:textAlignment="center"
+        android:textColor="#00BCD4"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/signup"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:gravity="center"
+        android:backgroundTint="#00BCD4"
+        android:text="SIGNUP"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        android:onClick="signup"/>
+</LinearLayout>

@@ -1,0 +1,36 @@
+[
+  {
+    "name": "Mysore",
+    "lat": "96.95",
+    "long": "76.63",
+    "temp": "22",
+    "humidity": "90%"
+  },
+  {
+    "name": "Bangalore",
+    "lat": "96.98",
+    "long": "76.73",
+    "temp": "20",
+    "humidity": "80%"
+  }
+]
+
+xml
+
+<?xml version="1.0"?>
+<records>
+    <place>
+        <cityname>Mysore</cityname>
+        <lat>96.95</lat>
+        <long>76.63</long>
+        <temp>22</temp>
+        <humidity>90%</humidity>
+    </place>
+    <place>
+        <cityname>Bangalore</cityname>
+        <lat>96.98</lat>
+        <long>76.73</long>
+        <temp>20</temp>
+        <humidity>80%</humidity>
+    </place>
+</records>

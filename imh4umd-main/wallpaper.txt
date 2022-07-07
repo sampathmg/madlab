@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/nine"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="20sp"
+        android:text="WALL PAPER CHANGING APP"
+        android:textAlignment="center"
+        android:textColor="@color/teal_700"
+        android:textSize="35sp"
+        android:textStyle="bold" />
+
+
+    <Button
+
+
+        android:id="@+id/changewallpaper"
+        android:padding="10sp"
+        android:layout_marginTop="200dp"
+        style="@style/MaterialAlertDialog.Material3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:onClick="changewallpaper"
+        android:textSize="25sp"
+        android:text="Change Wall Paper"
+        android:textColor="#A6D6EC"
+        />
+
+
+
+
+</LinearLayout>
+
+
+JAVA
+
+package com.example.myapplication;
+
+
+import androidx.appcompat.app.AppCompatActivity;
+
+
+import android.app.WallpaperManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.view.View;
+
+
+import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
+
+
+public class MainActivity extends AppCompatActivity {
+    Timer myTimer;
+    Drawable drawable;
+    WallpaperManager wpm;
+    int next=1;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        myTimer=new Timer();
+        wpm=WallpaperManager.getInstance(this);
+    }
+
+
+    public void changewallpaper(View v)
+    {
+        setwallpaper();
+    }
+
+
+    public void setwallpaper()
+    {
+        myTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if(next==1)
+                {
+                    drawable=getResources().getDrawable(R.drawable.one);
+                    next=2;
+                }
+                else if(next==2)
+                {
+                    drawable=getResources().getDrawable(R.drawable.two);
+                    next=3;
+                }
+                else if(next==3)
+                {
+                    drawable=getResources().getDrawable(R.drawable.three);
+                    next=4;
+                }
+                else if(next==4)
+                {
+                    drawable=getResources().getDrawable(R.drawable.four);
+                    next=5;
+                }
+                else if(next==5)
+                {
+                    drawable=getResources().getDrawable(R.drawable.five);
+                    next=6;
+                }
+                else if(next==6)
+                {
+                    drawable=getResources().getDrawable(R.drawable.six);
+                    next=7;
+                }
+                else if(next==7)
+                {
+                    drawable=getResources().getDrawable(R.drawable.seven);
+                    next=8;
+                }
+                else if(next==8)
+                {
+                    drawable=getResources().getDrawable(R.drawable.eight);
+                    next=9;
+                }
+                else if(next==9)
+                {
+                    drawable=getResources().getDrawable(R.drawable.nine);
+                    next=10;
+                }
+                else if(next==10)
+                {
+                    drawable=getResources().getDrawable(R.drawable.ten);
+                    next=1;
+                }
+                Bitmap img=((BitmapDrawable)drawable).getBitmap();
+                try {
+                    wpm.setBitmap(img);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        },5000,5000);
+    }
+}
